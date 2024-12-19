@@ -1,0 +1,12 @@
+@import "./common/vars";
+@import "./common/breakpoints";
+@import "./common/reset";
+@import "./common/mixins";
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  color: $white-color;
+  background-color: $background-color-main;
+}
