@@ -1,0 +1,45 @@
+.welcomePageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  @include media($mobile) {
+  }
+
+  @include media($tablet) {
+    display: block;
+    width: 472px;
+    padding: 40px 168px 214px 64px;
+    max-width: none;
+  }
+
+  @include media($desktop) {
+    display: flex;
+    gap: 16px;
+  }
+}
+.welcomePageImg {
+  padding: 20px 40px 0 40px;
+  background-color: $background-color-content;
+  border-radius: 30px;
+  overflow: hidden;
+
+  @include media($tablet) {
+    display: none;
+  }
+
+  @include media($desktop) {
+    display: block;
+    width: 600px;
+    padding: 80px 97px 0 98px;
+  }
+}
+.imageIphone {
+  height: 331px;
+  width: 255px;
+
+  @include media($desktop) {
+    width: 405px;
+    height: 656px;
+  }
+}
