@@ -6,15 +6,12 @@
   @include media($mobile) {
     width: 100%;
   }
-
   @include media($tablet) {
-    width: 704px;
+    width: 768px;
     padding: 32px;
     max-width: none;
   }
-
   @include media($desktop) {
-    width: 1216px;
-    padding: 10px;
+    width: 1280px;
   }
 }

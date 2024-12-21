@@ -4,3 +4,10 @@
 :root {
   font-family: "Montserrat", sans-serif;
 }
+@include media($mobile) {
+}
+@include media($tablet) {
+}
+
+@include media($desktop) {
+}
