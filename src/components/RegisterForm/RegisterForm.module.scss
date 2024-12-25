@@ -7,6 +7,7 @@
     width: 472px;
   }
 }
+
 .iconEye {
   position: absolute;
   top: 14px;
@@ -17,8 +18,10 @@
   @include media($tablet) {
     width: 20px;
     height: 20px;
+    top: 16px;
   }
 }
+
 .wrapperInput {
   width: 100%;
   position: relative;
@@ -27,12 +30,14 @@
     margin-bottom: 14px;
   }
 }
+
 .wrapperInputLast {
   margin-bottom: 20px;
   @include media($tablet) {
     margin-bottom: 82px;
   }
 }
+
 .registerFormInput {
   display: block;
   outline: none;
@@ -55,32 +60,37 @@
     line-height: 18px;
   }
 }
+
 .registerFormInput:focus {
   background-color: $input-color;
   border: 1px solid $gray-text-color;
 }
+
 .inputName {
   padding-left: 59px;
   @include media($tablet) {
     padding-left: 67px;
   }
 }
+
 .inputEmail {
   padding-left: 49px;
   @include media($tablet) {
     padding-left: 57px;
   }
 }
+
 .inputPassword {
   padding-left: 78px;
   @include media($tablet) {
     padding-left: 93px;
   }
 }
+
 .registerFormLabel {
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 15px;
+  left: 14px;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
@@ -90,8 +100,10 @@
   @include media($tablet) {
     font-size: 14px;
     line-height: 18px;
+    top: 17px;
   }
 }
+
 .registerFormButtonBox {
   display: flex;
   gap: 14px;
@@ -100,9 +112,9 @@
     gap: 20px;
   }
 }
+
 .registerFormButton {
   display: block;
-  border: none;
   padding: 12px 22px;
   font-size: 14px;
   font-weight: 700;
@@ -114,6 +126,8 @@
   border-radius: 30px;
   background-color: $white-color;
   cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease,
+    border-color 0.3s ease;
   @include media($tablet) {
     padding: 16px 24px;
     font-size: 20px;
@@ -123,9 +137,9 @@
     background-color: $background-color-main;
     color: $white-color;
     border-color: $gray-text-color;
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
+
 .registerFormLink {
   font-size: 12px;
   font-weight: 500;
@@ -143,6 +157,7 @@
     transition: color 0.3s ease;
   }
 }
+
 .error {
   font-size: 12px;
   font-weight: 500;
@@ -154,9 +169,11 @@
     margin-top: 4px;
   }
 }
+
 .errorBorder {
   border: 1px solid $play-red-color;
 }
+
 .validBorder {
   border: 1px solid $statistic-green-color;
 }

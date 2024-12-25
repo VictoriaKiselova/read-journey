@@ -1,1 +1,4 @@
-export const selectIsbooksRecommend = state => state.auth.booksRecommend;
+export const selectIsbooksRecommend = state => state.books.booksRecommend;
+export const selectIsModal = state => state.books.isModal;
+export const selectIsError = state => state.books.error;
+export const selectLoading = state => state.books.loading;

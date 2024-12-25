@@ -5,6 +5,17 @@ const booksSlice = createSlice({
   name: "books",
   initialState: {
     booksRecommend: [],
+    isModal: false,
+    loading: false,
+    error: false,
+  },
+  reducers: {
+    modalOpen: state => {
+      state.isModal = true;
+    },
+    modalClose: state => {
+      state.isModal = false;
+    },
   },
   extraReducers: builder =>
     builder
@@ -14,7 +25,7 @@ const booksSlice = createSlice({
       })
       .addCase(fetchBooks.fulfilled, (state, action) => {
         state.booksRecommend = action.payload.results;
-        state.isLoggedIn = false;
+        state.loading = false;
       })
       .addCase(fetchBooks.rejected, state => {
         state.error = true;
@@ -22,4 +33,5 @@ const booksSlice = createSlice({
       }),
 });
 
+export const { modalOpen, modalClose } = booksSlice.actions;
 export default booksSlice.reducer;

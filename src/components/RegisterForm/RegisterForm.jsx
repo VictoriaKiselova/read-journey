@@ -1,8 +1,9 @@
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchSignup } from "../../redux/auth/operations";
+import { Link, useOutletContext } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useOutletContext } from "react-router-dom";
 import Icon from "../Icon/Icon";
 import spriteRead from "../../assets/Image/sprite-read.svg";
 import clsx from "clsx";
@@ -28,6 +29,7 @@ let registerSchema = Yup.object({
 });
 
 export default function RegisterForm() {
+  const dispatch = useDispatch();
   const { isPasswordVisible, togglePasswordVisibility } = useOutletContext();
   const {
     register,
@@ -38,14 +40,15 @@ export default function RegisterForm() {
     resolver: yupResolver(registerSchema),
   });
 
-  const onSubmit = data => {
+  const handleSignup = data => {
     console.log("Form Data:", data);
+    dispatch(fetchSignup(data));
     reset();
   };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(handleSignup)}
       className={style.registerFormContainer}>
       <div className={style.wrapperInput}>
         <label htmlFor="name" className={style.registerFormLabel}>
