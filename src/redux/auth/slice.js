@@ -1,15 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSignup } from "./operations";
+import { fetchSignup, fetchSignin } from "./operations";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: {
-      email: null,
-      name: null,
-    },
+    name: null,
     token: null,
-    isLoggedIn: false,
+    isAuthorized: false,
     isRefreshing: false,
     loading: false,
     error: false,
@@ -21,12 +18,27 @@ const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchSignup.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.name = action.payload.name;
         state.token = action.payload.token;
-        state.isLoggedIn = true;
+        state.isAuthorized = true;
+        state.error = false;
       })
-      .addCase(fetchSignup.rejected, state => {
-        state.error = true;
+      .addCase(fetchSignup.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchSignin.pending, state => {
+        state.error = false;
+        state.loading = true;
+      })
+      .addCase(fetchSignin.fulfilled, (state, action) => {
+        state.name = action.payload.name;
+        state.token = action.payload.token;
+        state.isAuthorized = true;
+        state.error = false;
+      })
+      .addCase(fetchSignin.rejected, (state, action) => {
+        state.error = action.payload;
         state.loading = false;
       }),
 });

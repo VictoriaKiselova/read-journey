@@ -2,18 +2,28 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://readjourney.b.goit.study/api";
-// axios.defaults.headers.common['Authorization'] =
-//  AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 export const fetchSignup = createAsyncThunk(
   "auth/signup",
-  async (_, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.get("/users/signup");
+      const response = await axios.post("/users/signup", data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data);
+    }
+  }
+);
+
+export const fetchSignin = createAsyncThunk(
+  "auth/signin",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.post("/users/signin", data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

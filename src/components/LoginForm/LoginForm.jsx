@@ -1,14 +1,15 @@
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useOutletContext } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchSignin } from "../../redux/auth/operations";
 import Icon from "../Icon/Icon";
 import spriteRead from "../../assets/Image/sprite-read.svg";
 import clsx from "clsx";
 import style from "./LoginForm.module.scss";
 
-let registerSchema = Yup.object({
+let loginSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
@@ -17,18 +18,18 @@ let registerSchema = Yup.object({
 
 export default function LoginForm() {
   const { isPasswordVisible, togglePasswordVisibility } = useOutletContext();
-
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(registerSchema),
+    resolver: yupResolver(loginSchema),
   });
 
   const onSubmit = data => {
-    console.log("Form Data:", data);
+    dispatch(fetchSignin(data));
     reset();
   };
 
@@ -79,7 +80,7 @@ export default function LoginForm() {
         <input
           id="password"
           name="password"
-          type="password"
+          type={isPasswordVisible ? "text" : "password"}
           {...register("password")}
           className={clsx(
             style.registerFormInput,
