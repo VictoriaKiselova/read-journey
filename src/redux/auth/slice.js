@@ -5,7 +5,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     name: null,
-    token: null,
     isAuthorized: false,
     isRefreshing: false,
     loading: false,
@@ -19,8 +18,8 @@ const authSlice = createSlice({
       })
       .addCase(fetchSignup.fulfilled, (state, action) => {
         state.name = action.payload.name;
-        state.token = action.payload.token;
         state.isAuthorized = true;
+        state.loading = false;
         state.error = false;
       })
       .addCase(fetchSignup.rejected, (state, action) => {
@@ -33,8 +32,8 @@ const authSlice = createSlice({
       })
       .addCase(fetchSignin.fulfilled, (state, action) => {
         state.name = action.payload.name;
-        state.token = action.payload.token;
         state.isAuthorized = true;
+        state.loading = false;
         state.error = false;
       })
       .addCase(fetchSignin.rejected, (state, action) => {

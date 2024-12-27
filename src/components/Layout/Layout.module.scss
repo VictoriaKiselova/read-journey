@@ -7,3 +7,14 @@
     gap: 16px;
   }
 }
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  @include media($tablet) {
+    gap: 16px;
+  }
+  @include media($desktop) {
+    flex-direction: row;
+  }
+}

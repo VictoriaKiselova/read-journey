@@ -2,13 +2,14 @@ import { useEffect, lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { selectIsAuthorized } from "../redux/auth/selectors";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import Authorization from "../pages/Authorization/Authorization";
+import WelcomePage from "../pages/WelcomePage/WelcomePage";
 import Layout from "../components/Layout/Layout";
-const RecommendedPage = lazy(() =>
-  import("../pages/RecommendedPage/RecommendedPage")
+const RecommendedBooks = lazy(() =>
+  import("./RecommendedBooks/RecommendedBooks")
 );
 const RegisterForm = lazy(() => import("./RegisterForm/RegisterForm"));
 const LoginForm = lazy(() => import("./LoginForm/LoginForm"));
+const MyLibraryBooks = lazy(() => import("./MyLibraryBooks/MyLibraryBooks"));
 import style from "./App.module.scss";
 
 export default function App() {
@@ -25,18 +26,20 @@ export default function App() {
     <div className={style.app}>
       <Suspense fallback={null}>
         <Routes>
-          {isAuthorized ? (
+          <Route path="/" element={<WelcomePage />}>
+            <Route path="register" element={<RegisterForm />} />
+            <Route path="login" element={<LoginForm />} />
+            <Route index element={<Navigate to="register" replace />} />
+          </Route>
+
+          {isAuthorized && (
             <Route path="/" element={<Layout />}>
-              <Route path="recommended" element={<RecommendedPage />} />
+              <Route path="recommended" element={<RecommendedBooks />} />
               <Route index element={<Navigate to="recommended" replace />} />
-            </Route>
-          ) : (
-            <Route path="/" element={<Authorization />}>
-              <Route path="register" element={<RegisterForm />} />
-              <Route path="login" element={<LoginForm />} />
-              <Route index element={<Navigate to="register" replace />} />
+              <Route path="library" element={<MyLibraryBooks />} />
             </Route>
           )}
+
           {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
       </Suspense>
