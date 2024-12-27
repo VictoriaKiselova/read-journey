@@ -6,9 +6,9 @@ import iPhoneDesktop1x from "../../assets/Image/iPhoneDesktop1x.png";
 import iPhoneDesktop2x from "../../assets/Image/iPhoneDesktop2x.png";
 import Icon from "../../components/Icon/Icon";
 import spriteRead from "../../assets/Image/sprite-read.svg";
-import style from "./Authorization.module.scss";
+import style from "./WelcomePage.module.scss";
 
-export default function Authorization() {
+export default function WelcomePage() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(prevState => !prevState);
