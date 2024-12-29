@@ -1,0 +1,37 @@
+.windowToTheWorldWrapper {
+  display: none;
+  @include media($desktop) {
+    padding: 15px 20px 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background-color: $input-color;
+    border-radius: 12px;
+  }
+}
+
+.imageBooks {
+  @include media($desktop) {
+    display: block;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.windowToTheWorldText {
+  @include media($desktop) {
+    width: 219px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: $text-color-gray;
+  }
+}
+
+.windowToTheWorldSpan {
+  @include media($desktop) {
+    color: $white-color;
+  }
+}

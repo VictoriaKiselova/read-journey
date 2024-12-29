@@ -19,7 +19,7 @@ export default function RecommendedBooks() {
       const newLimit = width <= 767 ? 2 : width < 1280 ? 8 : 10;
 
       if (newLimit !== limit) {
-        dispatch(setLimit(newLimit)); 
+        dispatch(setLimit(newLimit));
         dispatch(fetchRecommendBooks({ limit: newLimit, page: 1 }));
       }
     };
@@ -91,9 +91,9 @@ export default function RecommendedBooks() {
               className={style.recommendedItemImage}
             />
             <p className={style.recommendedItemTitle}>
-              {book.title.length > 20
-                ? `${book.title.slice(0, 20)}...`
-                : book.title}
+              {book.title.length > 15
+                ? `${book.title.slice(0, 15).toLowerCase()}...`
+                : book.title.toLowerCase()}
             </p>
             <p className={style.recommendedItemAuthor}>{book.author}</p>
           </li>
