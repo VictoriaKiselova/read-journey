@@ -11,7 +11,7 @@
   }
 
   @include media($desktop) {
-    padding: 40px 41px 28px 41px;
+    padding: 40px 40px 28px 40px;
   }
 }
 
@@ -75,6 +75,11 @@
     column-gap: 25px;
     row-gap: 28px;
   }
+  @include media($desktop) {
+    column-gap: 20px;
+    row-gap: 27px;
+    flex: 0 0 calc((100% - (20px * 4)) / 5);
+  }
 }
 
 .recommendedItem {
@@ -97,7 +102,7 @@
   text-align: left;
   color: $white-color;
   margin-bottom: 2px;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 .recommendedItemAuthor {

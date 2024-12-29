@@ -1,0 +1,21 @@
+.dashboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: $background-color-content;
+  border-radius: 30px;
+  @include media($tablet) {
+    flex-direction: row;
+    padding: 32px;
+    gap: 32px;
+  }
+  @include media($desktop) {
+    width: 353px;
+    flex-shrink: 0;
+    padding: 40px 20px 20px 20px;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
