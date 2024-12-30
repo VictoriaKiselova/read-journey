@@ -5,6 +5,7 @@ const booksSlice = createSlice({
   name: "books",
   initialState: {
     booksRecommend: [],
+    libraryBooks: [],
     isModal: false,
     currentPage: 1,
     limit: 2,

@@ -7,10 +7,12 @@
     max-width: 375px;
   }
   @include media($tablet) {
+    width: 704px;
     padding: 40px;
   }
 
   @include media($desktop) {
+    width: 847px;
     padding: 40px 40px 28px 40px;
   }
 }
@@ -69,7 +71,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 21px;
   @include media($tablet) {
     column-gap: 25px;

@@ -1,13 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectName } from "../../redux/auth/selectors";
+import { fetchSignout } from "../../redux/auth/operations";
 import Icon from "../Icon/Icon";
 import spriteRead from "../../assets/Image/sprite-read.svg";
 import style from "./Header.module.scss";
 
 export default function Header() {
+  const dispatch = useDispatch();
   const nameUser = useSelector(selectName);
   const location = useLocation();
+
+  const handleSingOut = () => {
+    dispatch(fetchSignout());
+  };
 
   return (
     <header className={style.header}>
@@ -55,7 +61,7 @@ export default function Header() {
           height="28px"
           className={style.iconBurgerMenu}
         />
-        <button type="button" className={style.logOut}>
+        <button type="button" className={style.logOut} onClick={handleSingOut}>
           Log out
         </button>
       </div>

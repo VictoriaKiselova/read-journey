@@ -2,23 +2,19 @@ import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
 import { fetchRecommendBooks } from "../../redux/books/operations";
 import clsx from "clsx";
 import style from "./Filters.module.scss";
 
 export default function Filters() {
   const dispatch = useDispatch();
-  const locationLibrary = useLocation().pathname.includes("library");
 
   let filterSchema = Yup.object({
     title: Yup.string(),
     author: Yup.string(),
-    number: locationLibrary
-      ? Yup.number()
-          .typeError("Must be a number")
-          .required("Enter number of pages")
-      : Yup.mixed(),
+    number: Yup.number()
+      .typeError("Must be a number")
+      .required("Enter number of pages"),
   });
 
   const {
@@ -68,29 +64,9 @@ export default function Filters() {
         />
       </div>
 
-      {locationLibrary && (
-        <div className={style.wrapperInput}>
-          <label htmlFor="number" className={style.registerFormLabel}>
-            Number of pages:
-          </label>
-          <input
-            id="number"
-            name="number"
-            {...register("number")}
-            className={clsx(style.registerFormInput, style.inputEmail)}
-          />
-        </div>
-      )}
-
-      {locationLibrary ? (
-        <button type="submit" className={style.registerFormButton}>
-          Add book
-        </button>
-      ) : (
-        <button type="submit" className={style.registerFormButton}>
-          To apply
-        </button>
-      )}
+      <button type="submit" className={style.registerFormButton}>
+        To apply
+      </button>
     </form>
   );
 }

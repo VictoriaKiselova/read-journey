@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSignup, fetchSignin } from "./operations";
+import {
+  fetchSignup,
+  fetchSignin,
+  fetchRefresh,
+  fetchSignout,
+} from "./operations";
 
 const authSlice = createSlice({
   name: "auth",
@@ -7,6 +12,7 @@ const authSlice = createSlice({
     name: null,
     isAuthorized: false,
     isRefreshing: false,
+    token: null,
     loading: false,
     error: false,
   },
@@ -18,6 +24,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchSignup.fulfilled, (state, action) => {
         state.name = action.payload.name;
+        state.token = action.payload.token;
         state.isAuthorized = true;
         state.loading = false;
         state.error = false;
@@ -32,11 +39,42 @@ const authSlice = createSlice({
       })
       .addCase(fetchSignin.fulfilled, (state, action) => {
         state.name = action.payload.name;
+        state.token = action.payload.token;
         state.isAuthorized = true;
         state.loading = false;
         state.error = false;
       })
       .addCase(fetchSignin.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchRefresh.pending, state => {
+        state.error = false;
+        state.loading = true;
+      })
+      .addCase(fetchRefresh.fulfilled, (state, action) => {
+        state.name = action.payload.name;
+        state.token = action.payload.token;
+        state.isAuthorized = true;
+        state.loading = false;
+        state.error = false;
+      })
+      .addCase(fetchRefresh.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchSignout.pending, state => {
+        state.error = false;
+        state.loading = true;
+      })
+      .addCase(fetchSignout.fulfilled, (state, action) => {
+        state.name = null;
+        state.token = null;
+        state.isAuthorized = false;
+        state.loading = false;
+        state.error = false;
+      })
+      .addCase(fetchSignout.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
       }),

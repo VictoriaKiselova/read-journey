@@ -23,7 +23,7 @@ const pAuthReducer = persistReducer(persistConfigAuth, authSliceReducer);
 const persistConfigBooks = {
   key: "books",
   storage,
-  whitelist: [],
+  whitelist: ["booksRecommend"],
 };
 const pBooksReducer = persistReducer(persistConfigBooks, booksSliceReducer);
 
