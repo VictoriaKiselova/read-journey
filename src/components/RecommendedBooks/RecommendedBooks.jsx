@@ -1,90 +1,42 @@
 import Icon from "../Icon/Icon";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setNextPage, setPrevPage, setLimit } from "../../redux/books/slice";
 import { fetchRecommendBooks } from "../../redux/books/operations";
+import { modalOpen } from "../../redux/books/slice";
 import spriteRead from "../../assets/Image/sprite-read.svg";
-import clsx from "clsx";
 import style from "./RecommendedBooks.module.scss";
 
 export default function RecommendedBooks() {
-  const { booksRecommend, limit, currentPage, totalPages } = useSelector(
-    state => state.books
-  );
   const dispatch = useDispatch();
+  const [randomBooks, setRandomBooks] = useState([]);
+  const { booksRecommend } = useSelector(state => state.books.recommend);
 
   useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      const newLimit = width <= 767 ? 2 : width < 1280 ? 8 : 10;
+    dispatch(fetchRecommendBooks());
+  }, [dispatch]);
 
-      if (newLimit !== limit) {
-        dispatch(setLimit(newLimit));
-        dispatch(fetchRecommendBooks({ limit: newLimit, page: 1 }));
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, [dispatch, limit]);
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      dispatch(fetchRecommendBooks({ page: currentPage + 1, limit }));
-      dispatch(setNextPage());
+  useEffect(() => {
+    if (booksRecommend.length > 0) {
+      const shuffled = [...booksRecommend].sort(() => 0.5 - Math.random());
+      setRandomBooks(shuffled.slice(0, 3));
     }
-  };
+  }, [booksRecommend]);
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      dispatch(fetchRecommendBooks({ page: currentPage - 1, limit }));
-      dispatch(setPrevPage());
-    }
+  const handleOpenModal = book => {
+    dispatch(modalOpen(book));
   };
 
   return (
-    <section className={style.recommended}>
-      <div className={style.recommendedTitleWrapper}>
-        <h3 className={style.recommendedTitle}>Recommended</h3>
-        <div className={style.recommendedButtonWrapper}>
-          <button
-            type="button"
-            onClick={handlePrevPage}
-            className={clsx(style.recommendedButton, {
-              [style.disabled]: currentPage === 1,
-            })}
-            disabled={currentPage === 1}>
-            <Icon
-              sprite={spriteRead}
-              id="icon-chevron-left"
-              width="20px"
-              height="20px"
-              className={style.iconArrov}
-            />
-          </button>
-          <button
-            type="button"
-            onClick={handleNextPage}
-            className={clsx(style.recommendedButton, {
-              [style.disabled]: currentPage === totalPages,
-            })}
-            disabled={currentPage === totalPages}>
-            <Icon
-              sprite={spriteRead}
-              id="icon-chevron-rigth"
-              width="20px"
-              height="20px"
-              className={style.iconArrov}
-            />
-          </button>
-        </div>
-      </div>
+    <div className={style.recommendedBooksContainer}>
+      <h3 className={style.recommendedBooksTitle}>Recommended books</h3>
 
       <ul className={style.recommendedList}>
-        {booksRecommend.map(book => (
-          <li key={book._id} className={style.recommendedItem}>
+        {randomBooks.map(book => (
+          <li
+            key={book._id}
+            className={style.recommendedItem}
+            onClick={() => handleOpenModal(book)}>
             <img
               src={book.imageUrl}
               alt={book.title}
@@ -99,6 +51,17 @@ export default function RecommendedBooks() {
           </li>
         ))}
       </ul>
-    </section>
+
+      <Link to="recommended" className={style.homeLink}>
+        Home
+        <Icon
+          sprite={spriteRead}
+          id="icon-arrov-rigth"
+          width="20px"
+          height="20px"
+          className={style.iconArrow}
+        />
+      </Link>
+    </div>
   );
 }

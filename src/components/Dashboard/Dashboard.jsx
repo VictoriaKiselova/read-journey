@@ -3,6 +3,7 @@ import Filters from "../Filters/Filters";
 import AddBook from "../AddBook/AddBook";
 import HowToUse from "../HowToUse/HowToUse";
 import WindowToTheWorld from "../WindowToTheWorld/WindowToTheWorld";
+import RecommendedBooks from "../RecommendedBooks/RecommendedBooks";
 import style from "./Dashboard.module.scss";
 
 export default function Dashboard() {
@@ -15,9 +16,15 @@ export default function Dashboard() {
         <>
           <Filters />
           <HowToUse />
-          <WindowToTheWorld />
         </>
       )}
+      {locationLibrary && (
+        <>
+          <AddBook />
+          <RecommendedBooks />
+        </>
+      )}
+      <WindowToTheWorld />
     </div>
   );
 }

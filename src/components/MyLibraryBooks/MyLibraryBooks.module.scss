@@ -1,0 +1,195 @@
+.myLibraryBooksContainer {
+  width: 100%;
+  min-height: 407px;
+  padding: 40px 20px;
+  background-color: $background-color-content;
+  border-radius: 30px;
+  @include media($tablet) {
+    width: 704px;
+    min-height: 518px;
+    padding: 40px;
+  }
+  @include media($desktop) {
+    width: 847px;
+    min-height: 651px;
+  }
+}
+
+.myLibraryBooksFilters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.myLibraryBooksTitle {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $white-color;
+  @include media($tablet) {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.myLibraryBooksSelect {
+  padding: 12px 14px;
+  outline: none;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  border-radius: 12px;
+  background-color: $background-color-content;
+  border: 1px solid $select-color;
+  color: $white-color;
+  @include media($tablet) {
+    padding: 14px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.myLibraryBooksOption {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $text-color-gray;
+  @include media($tablet) {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  @include media($desktop) {
+  }
+  &:hover {
+    color: $white-color;
+    background-color: $text-color-gray;
+  }
+}
+
+.recommendedList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 21px;
+  @include media($tablet) {
+    column-gap: 25px;
+    row-gap: 28px;
+  }
+  @include media($desktop) {
+    column-gap: 20px;
+    row-gap: 27px;
+    flex: 0 0 calc((100% - (20px * 4)) / 5);
+  }
+}
+
+.recommendedItem {
+  width: 137px;
+  &:hover .recommendedItemImage {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+.recommendedItemImage {
+  display: block;
+  border-radius: 8px;
+  width: 137px;
+  height: 208px;
+  margin-bottom: 8px;
+  object-fit: cover;
+}
+
+.recommendedItemTitle {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $white-color;
+  margin-bottom: 2px;
+  text-transform: capitalize;
+}
+
+.recommendedItemAuthor {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $text-color-gray;
+}
+
+.bookIconWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 63px;
+  @include media($mobile) {
+  }
+  @include media($tablet) {
+    margin-top: 86px;
+  }
+  @include media($desktop) {
+    margin-top: 147px;
+  }
+}
+
+.bookIconBox {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: $input-color;
+  margin-bottom: 10px;
+  @include media($mobile) {
+  }
+  @include media($tablet) {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 20px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.bookIcon {
+  width: 50px;
+  height: 50px;
+  @include media($tablet) {
+    width: 70px;
+    height: 70px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.libraryText {
+  width: 200px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: $white-color;
+}
+
+.librarySpan {
+  color: $text-color-gray;
+}

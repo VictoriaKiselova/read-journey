@@ -71,6 +71,9 @@
   @include media($mobile) {
     max-width: 203px;
   }
+  @include media($desktop) {
+    width: 200px;
+  }
 }
 
 .howToUseSpan {

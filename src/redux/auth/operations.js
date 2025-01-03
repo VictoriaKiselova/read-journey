@@ -64,7 +64,7 @@ export const fetchSignout = createAsyncThunk(
     try {
       const response = await axios.post("/users/signout");
       clearAuthHeader();
-      return response;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
