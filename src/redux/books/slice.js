@@ -1,22 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchRecommendBooks } from "./operations";
+import { fetchSignout } from "../auth/operations";
 
 const booksSlice = createSlice({
   name: "books",
   initialState: {
-    booksRecommend: [],
-    libraryBooks: [],
+    recommend: {
+      booksRecommend: [],
+      totalPages: null,
+    },
     isModal: false,
     currentPage: 1,
     limit: 2,
-    totalPages: null,
+    selectedBook: null,
   },
 
   reducers: {
-    modalOpen: state => {
+    modalOpen: (state, action) => {
       state.isModal = true;
+      state.selectedBook = action.payload;
     },
-    modalClose: state => {
+    modalClose: (state, action) => {
+      state.selectedBook = action.payload;
       state.isModal = false;
     },
     setNextPage: state => {
@@ -31,7 +36,6 @@ const booksSlice = createSlice({
     },
     setLimit: (state, action) => {
       state.limit = action.payload;
-      state.currentPage = 1;
     },
   },
   extraReducers: builder =>
@@ -41,12 +45,16 @@ const booksSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchRecommendBooks.fulfilled, (state, action) => {
-        state.booksRecommend = action.payload.results;
-        state.totalPages = action.payload.totalPages;
+        state.recommend.booksRecommend = action.payload.results;
+        state.recommend.totalPages = action.payload.totalPages;
         state.loading = false;
       })
       .addCase(fetchRecommendBooks.rejected, state => {
         state.error = true;
+        state.loading = false;
+      })
+      .addCase(fetchSignout.fulfilled, (state, action) => {
+        state.recommend.booksRecommend = [];
         state.loading = false;
       }),
 });

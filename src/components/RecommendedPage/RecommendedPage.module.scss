@@ -1,0 +1,131 @@
+.recommended {
+  width: 100%;
+  padding: 40px 20px;
+  border-radius: 30px;
+  background-color: $background-color-content;
+  @include media($mobile) {
+    max-width: 375px;
+  }
+  @include media($tablet) {
+    width: 704px;
+    padding: 40px;
+  }
+  @include media($desktop) {
+    width: 847px;
+    padding: 40px 40px 28px 40px;
+  }
+}
+
+.recommendedTitle {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $white-color;
+  @include media($tablet) {
+    font-size: 28px;
+    line-height: 32px;
+  }
+}
+
+.recommendedTitleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  @include media($tablet) {
+    margin-bottom: 28px;
+  }
+}
+
+.recommendedButtonWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recommendedButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  @include media($tablet) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.iconArrov {
+  stroke: $white-color;
+}
+
+.recommendedList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 21px;
+  @include media($tablet) {
+    justify-content: flex-start;
+    column-gap: 25px;
+    row-gap: 28px;
+  }
+  @include media($desktop) {
+    column-gap: 20px;
+    row-gap: 27px;
+    flex: 0 0 calc((100% - (20px * 4)) / 5);
+  }
+}
+
+.recommendedItem {
+  width: 137px;
+  &:hover .recommendedItemImage {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+.recommendedItemImage {
+  display: block;
+  border-radius: 8px;
+  width: 137px;
+  height: 208px;
+  margin-bottom: 8px;
+}
+
+.recommendedItemTitle {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $white-color;
+  margin-bottom: 2px;
+  text-transform: capitalize;
+}
+
+.recommendedItemAuthor {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $text-color-gray;
+}
+
+.disabled {
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  cursor: default;
+
+  .iconArrov {
+    stroke: rgba(255, 255, 255, 0.2);
+  }
+}

@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { fetchRecommendBooks } from "../../redux/books/operations";
 import clsx from "clsx";
 import style from "./Filters.module.scss";
@@ -12,9 +12,6 @@ export default function Filters() {
   let filterSchema = Yup.object({
     title: Yup.string(),
     author: Yup.string(),
-    number: Yup.number()
-      .typeError("Must be a number")
-      .required("Enter number of pages"),
   });
 
   const {

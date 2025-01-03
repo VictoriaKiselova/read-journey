@@ -1,0 +1,150 @@
+.modalWrapper {
+  min-width: 240px;
+  width: 100%;
+  max-width: 335px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  padding: 40px 20px;
+  background-color: $background-color-content;
+  outline: none;
+  border: 1px solid rgba(#686868, 0.2);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  @include media($mobile) {
+    max-width: 335px;
+    padding: 40px 20px;
+  }
+  @include media($tablet) {
+    max-width: 360px;
+    padding: 40px 20px;
+  }
+  @include media($desktop) {
+    max-width: 375px;
+    padding: 40px 20px;
+  }
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonClose {
+  position: absolute;
+  top: 21px;
+  right: 21px;
+  background-color: transparent;
+  border: none;
+}
+
+.iconClose {
+  width: 22px;
+  height: 22px;
+  stroke: $white-color;
+}
+
+.recommendedItemImage {
+  display: block;
+  border-radius: 8px;
+  width: 137px;
+  height: 208px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.recommendedItemTitle {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: $white-color;
+  margin-bottom: 4px;
+  text-transform: capitalize;
+}
+
+.recommendedItemAuthor {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $text-color-gray;
+  margin-bottom: 4px;
+}
+
+.recommendedItemPages {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: $white-color;
+}
+
+.addFormButton {
+  display: block;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: $white-color;
+  border: 0.5px solid rgba(249, 249, 249, 0.1);
+  border-radius: 30px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease,
+    border-color 0.3s ease;
+  margin: 20px auto 0 auto;
+  @include media($tablet) {
+    padding: 12px 28px;
+    font-size: 16px;
+    line-height: 18px;
+  }
+  &:hover {
+    background-color: $white-color;
+    color: $background-color-main;
+    border-color: $white-color;
+    transition: background-color 0.3s ease, color 0.3s ease,
+      border-color 0.3s ease;
+  }
+}
+
+.likeImage {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.notificftionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: $white-color;
+  margin-bottom: 10px;
+}
+.notificftionText {
+  width: 242px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: $text-color-gray;
+}
+
+.notificftionSpan {
+  color: $white-color;
+}

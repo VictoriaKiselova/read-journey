@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSliceReducer from "./auth/slice";
 import booksSliceReducer from "./books/slice";
+import libraryFiltersReducer from "./libraryFilters/slice";
 import {
   persistStore,
   persistReducer,
@@ -27,10 +28,21 @@ const persistConfigBooks = {
 };
 const pBooksReducer = persistReducer(persistConfigBooks, booksSliceReducer);
 
+const persistConfigLibraryFilters = {
+  key: "filters",
+  storage,
+  whitelist: [],
+};
+const pLibraryFiltersReducer = persistReducer(
+  persistConfigLibraryFilters,
+  libraryFiltersReducer
+);
+
 export const store = configureStore({
   reducer: {
     auth: pAuthReducer,
     books: pBooksReducer,
+    filters: pLibraryFiltersReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

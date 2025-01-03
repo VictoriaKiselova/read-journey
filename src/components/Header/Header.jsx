@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectName } from "../../redux/auth/selectors";
 import { fetchSignout } from "../../redux/auth/operations";
@@ -8,11 +8,13 @@ import style from "./Header.module.scss";
 
 export default function Header() {
   const dispatch = useDispatch();
-  const nameUser = useSelector(selectName);
   const location = useLocation();
+  const navigate = useNavigate();
+  const nameUser = useSelector(selectName);
 
-  const handleSingOut = () => {
-    dispatch(fetchSignout());
+  const handleSingOut = async () => {
+    await dispatch(fetchSignout());
+    navigate("/login");
   };
 
   return (

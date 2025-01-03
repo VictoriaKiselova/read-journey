@@ -51,17 +51,20 @@ const authSlice = createSlice({
       .addCase(fetchRefresh.pending, state => {
         state.error = false;
         state.loading = true;
+        state.isRefreshing = true;
       })
       .addCase(fetchRefresh.fulfilled, (state, action) => {
         state.name = action.payload.name;
         state.token = action.payload.token;
         state.isAuthorized = true;
+        state.isRefreshing = false;
         state.loading = false;
         state.error = false;
       })
       .addCase(fetchRefresh.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
+        state.isRefreshing = false;
       })
       .addCase(fetchSignout.pending, state => {
         state.error = false;
