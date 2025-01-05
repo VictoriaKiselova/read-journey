@@ -3,6 +3,18 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://readjourney.b.goit.study/api";
 
+export const fetchAllBooks = createAsyncThunk(
+  "books/fetchAll",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("/books/recommend");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data);
+    }
+  }
+);
+
 export const fetchRecommendBooks = createAsyncThunk(
   "books/recommend",
   async ({ title, author, page, limit }, { rejectWithValue }) => {

@@ -3,6 +3,7 @@ import {
   fetchGetBooksOwn,
   fetchAddBooks,
   fetchAddBooksByIdFromRecommend,
+  fetchDeleteBookById,
 } from "./operations";
 
 const libraryFilters = createSlice({
@@ -22,7 +23,6 @@ const libraryFilters = createSlice({
       .addCase(fetchGetBooksOwn.pending, state => {
         state.error = false;
         state.loading = true;
-        state.ownBooks = [];
       })
       .addCase(fetchGetBooksOwn.fulfilled, (state, action) => {
         state.ownBooks = action.payload;
@@ -41,7 +41,7 @@ const libraryFilters = createSlice({
       .addCase(fetchAddBooks.fulfilled, (state, action) => {
         state.ownBooks = [...state.ownBooks, action.payload];
         state.loading = false;
-        // state.isModal = true;
+        state.error = false;
       })
       .addCase(fetchAddBooks.rejected, state => {
         state.error = true;
@@ -56,6 +56,18 @@ const libraryFilters = createSlice({
         state.isSuccessAddToLibrary = true;
       })
       .addCase(fetchAddBooksByIdFromRecommend.rejected, state => {
+        state.error = true;
+        state.loading = false;
+      })
+      .addCase(fetchDeleteBookById.pending, state => {
+        state.error = false;
+        state.loading = true;
+      })
+      .addCase(fetchDeleteBookById.fulfilled, (state, action) => {
+        state.error = false;
+        state.loading = false;
+      })
+      .addCase(fetchDeleteBookById.rejected, state => {
         state.error = true;
         state.loading = false;
       }),

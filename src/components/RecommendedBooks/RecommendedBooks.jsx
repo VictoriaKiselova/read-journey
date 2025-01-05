@@ -2,26 +2,28 @@ import Icon from "../Icon/Icon";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchRecommendBooks } from "../../redux/books/operations";
+import { selectAllBooks } from "../../redux/books/selectors";
+import { fetchAllBooks } from "../../redux/books/operations";
 import { modalOpen } from "../../redux/books/slice";
 import spriteRead from "../../assets/Image/sprite-read.svg";
 import style from "./RecommendedBooks.module.scss";
 
 export default function RecommendedBooks() {
   const dispatch = useDispatch();
-  const [randomBooks, setRandomBooks] = useState([]);
-  const { booksRecommend } = useSelector(state => state.books.recommend);
+  const allBooksList = useSelector(selectAllBooks);
+
+  const [randomSelectedBooks, setRandomSelectedBooks] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchRecommendBooks());
+    dispatch(fetchAllBooks());
   }, [dispatch]);
 
   useEffect(() => {
-    if (booksRecommend.length > 0) {
-      const shuffled = [...booksRecommend].sort(() => 0.5 - Math.random());
-      setRandomBooks(shuffled.slice(0, 3));
+    if (allBooksList && allBooksList.length > 0) {
+      const shuffled = [...allBooksList].sort(() => 0.5 - Math.random());
+      setRandomSelectedBooks(shuffled.slice(0, 3));
     }
-  }, [booksRecommend]);
+  }, [allBooksList]);
 
   const handleOpenModal = book => {
     dispatch(modalOpen(book));
@@ -32,7 +34,7 @@ export default function RecommendedBooks() {
       <h3 className={style.recommendedBooksTitle}>Recommended books</h3>
 
       <ul className={style.recommendedList}>
-        {randomBooks.map(book => (
+        {randomSelectedBooks.map(book => (
           <li
             key={book._id}
             className={style.recommendedItem}

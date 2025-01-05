@@ -50,3 +50,17 @@ export const fetchGetBooksOwn = createAsyncThunk(
     }
   }
 );
+
+export const fetchDeleteBookById = createAsyncThunk(
+  "books/delete",
+  async (bookId, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/books/remove/${bookId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data || "An error has occurred"
+      );
+    }
+  }
+);

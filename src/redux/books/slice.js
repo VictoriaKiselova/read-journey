@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchRecommendBooks } from "./operations";
+import { fetchRecommendBooks, fetchAllBooks } from "./operations";
 import { fetchSignout } from "../auth/operations";
 
 const booksSlice = createSlice({
@@ -7,6 +7,7 @@ const booksSlice = createSlice({
   initialState: {
     recommend: {
       booksRecommend: [],
+      allBooks: [],
       totalPages: null,
     },
     isModal: false,
@@ -55,6 +56,20 @@ const booksSlice = createSlice({
       })
       .addCase(fetchSignout.fulfilled, (state, action) => {
         state.recommend.booksRecommend = [];
+        state.loading = false;
+        state.error = false;
+      })
+      .addCase(fetchAllBooks.pending, state => {
+        state.error = false;
+        state.loading = true;
+      })
+      .addCase(fetchAllBooks.fulfilled, (state, action) => {
+        state.allBooks = action.payload.results;
+        state.loading = false;
+        state.error = false;
+      })
+      .addCase(fetchAllBooks.rejected, state => {
+        state.error = true;
         state.loading = false;
       }),
 });

@@ -4,11 +4,13 @@
   padding: 40px 20px;
   background-color: $background-color-content;
   border-radius: 30px;
+
   @include media($tablet) {
     width: 704px;
     min-height: 518px;
     padding: 40px;
   }
+
   @include media($desktop) {
     width: 847px;
     min-height: 651px;
@@ -30,10 +32,12 @@
   letter-spacing: -0.02em;
   text-align: left;
   color: $white-color;
+
   @include media($tablet) {
     font-size: 28px;
     line-height: 32px;
   }
+
   @include media($desktop) {
   }
 }
@@ -50,11 +54,13 @@
   background-color: $background-color-content;
   border: 1px solid $select-color;
   color: $white-color;
+
   @include media($tablet) {
     padding: 14px;
     font-size: 14px;
     line-height: 18px;
   }
+
   @include media($desktop) {
   }
 }
@@ -66,28 +72,38 @@
   letter-spacing: -0.02em;
   text-align: left;
   color: $text-color-gray;
+
   @include media($tablet) {
     font-size: 14px;
     line-height: 18px;
   }
+
   @include media($desktop) {
   }
+
   &:hover {
     color: $white-color;
     background-color: $text-color-gray;
   }
 }
 
-.recommendedList {
+.myLibraryList {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 21px;
+
+  @include media($mobile) {
+  }
+
   @include media($tablet) {
+    align-items: start;
+    justify-content: flex-start;
     column-gap: 25px;
     row-gap: 28px;
   }
+
   @include media($desktop) {
     column-gap: 20px;
     row-gap: 27px;
@@ -95,8 +111,9 @@
   }
 }
 
-.recommendedItem {
+.myLibraryItem {
   width: 137px;
+
   &:hover .recommendedItemImage {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transform: scale(1.05);
@@ -104,7 +121,7 @@
   }
 }
 
-.recommendedItemImage {
+.myLibraryItemImage {
   display: block;
   border-radius: 8px;
   width: 137px;
@@ -113,9 +130,16 @@
   object-fit: cover;
 }
 
-.recommendedItemTitle {
+.myLibraryItemBook {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.myLibraryItemTitle {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 18px;
   letter-spacing: -0.02em;
   text-align: left;
@@ -124,7 +148,7 @@
   text-transform: capitalize;
 }
 
-.recommendedItemAuthor {
+.myLibraryItemAuthor {
   font-size: 10px;
   font-weight: 500;
   line-height: 12px;
@@ -133,17 +157,53 @@
   color: $text-color-gray;
 }
 
-.bookIconWrapper {
+.myLibraryButtonDelete {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  margin: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 80, 80, 0.65);
+  cursor: pointer;
+  transition: border 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgba(232, 80, 80, 0.1);
+    border: 1px solid rgba(232, 80, 80, 0.99);
+  }
+  &:focus {
+    border: 1px solid $play-red-color;
+  }
+  &:hover .iconDelete {
+    stroke: rgba(232, 80, 80, 0.99);
+  }
+  &:focus .iconDelete {
+    stroke: $play-red-color;
+  }
+}
+
+.iconDelete {
+  width: 14px;
+  height: 14px;
+  stroke: rgba(232, 80, 80, 0.65);
+  fill: $background-color-content;
+  transition: stroke 0.3s ease, fill 0.3s ease;
+}
+
+.bookIconWrappers {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   margin-top: 63px;
-  @include media($mobile) {
-  }
+
   @include media($tablet) {
     margin-top: 86px;
   }
+
   @include media($desktop) {
     margin-top: 147px;
   }
@@ -158,25 +218,21 @@
   border-radius: 50%;
   background-color: $input-color;
   margin-bottom: 10px;
-  @include media($mobile) {
-  }
+
   @include media($tablet) {
     width: 130px;
     height: 130px;
     margin-bottom: 20px;
-  }
-  @include media($desktop) {
   }
 }
 
 .bookIcon {
   width: 50px;
   height: 50px;
+
   @include media($tablet) {
     width: 70px;
     height: 70px;
-  }
-  @include media($desktop) {
   }
 }
 
