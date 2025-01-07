@@ -1,5 +1,6 @@
 .myLibraryBooksContainer {
   width: 100%;
+  position: relative;
   min-height: 407px;
   padding: 40px 20px;
   background-color: $background-color-content;
@@ -113,11 +114,9 @@
 
 .myLibraryItem {
   width: 137px;
-
-  &:hover .recommendedItemImage {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    transform: scale(1.05);
-    transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  &:hover .myLibraryItemImage {
+    transform: scale(1.04);
   }
 }
 
@@ -128,6 +127,7 @@
   height: 208px;
   margin-bottom: 8px;
   object-fit: cover;
+  transition: transform 0.5s ease-in-out;
 }
 
 .myLibraryItemBook {
@@ -174,14 +174,8 @@
     background-color: rgba(232, 80, 80, 0.1);
     border: 1px solid rgba(232, 80, 80, 0.99);
   }
-  &:focus {
-    border: 1px solid $play-red-color;
-  }
   &:hover .iconDelete {
     stroke: rgba(232, 80, 80, 0.99);
-  }
-  &:focus .iconDelete {
-    stroke: $play-red-color;
   }
 }
 

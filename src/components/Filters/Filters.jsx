@@ -1,13 +1,15 @@
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { fetchRecommendBooks } from "../../redux/books/operations";
+import { selectAllBooks } from "../../redux/books/selectors";
+import { setFilteredBooks } from "../../redux/books/slice";
 import clsx from "clsx";
 import style from "./Filters.module.scss";
 
 export default function Filters() {
   const dispatch = useDispatch();
+  const allBooks = useSelector(selectAllBooks);
 
   let filterSchema = Yup.object({
     title: Yup.string(),
@@ -25,10 +27,23 @@ export default function Filters() {
 
   const onSubmit = data => {
     const { title, author } = data;
+
     if (!title && !author) {
+      dispatch(setFilteredBooks(allBooks));
       return;
     }
-    dispatch(fetchRecommendBooks({ title, author, page: 1, limit: 10 }));
+
+    const filtered = allBooks.filter(book => {
+      const matchesTitle = title
+        ? book.title.toLowerCase().includes(title.toLowerCase())
+        : true;
+      const matchesAuthor = author
+        ? book.author.toLowerCase().includes(author.toLowerCase())
+        : true;
+      return matchesTitle && matchesAuthor;
+    });
+
+    dispatch(setFilteredBooks(filtered));
     reset();
   };
 

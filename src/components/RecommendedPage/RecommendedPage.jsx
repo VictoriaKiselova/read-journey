@@ -5,19 +5,35 @@ import {
   setPrevPage,
   setLimit,
   modalOpen,
+  setFilteredBooks,
 } from "../../redux/books/slice";
-import { fetchRecommendBooks } from "../../redux/books/operations";
+import {
+  fetchRecommendBooks,
+  fetchAllBooks,
+} from "../../redux/books/operations";
+import {
+  selectIsLoading,
+  selectIsFilteredBooks,
+} from "../../redux/books/selectors";
 import spriteRead from "../../assets/Image/sprite-read.svg";
 import clsx from "clsx";
 import Icon from "../Icon/Icon";
+import Loader from "../Loader/Loader";
 import style from "./RecommendedPage.module.scss";
 
 export default function RecommendedPage() {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const filteredBooks = useSelector(selectIsFilteredBooks);
+
   const { booksRecommend, totalPages } = useSelector(
     state => state.books.recommend
   );
-  const { limit, currentPage } = useSelector(state => state.books);
+  const { limit, page } = useSelector(state => state.books);
+
+  useEffect(() => {
+    dispatch(fetchAllBooks());
+  }, [dispatch]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,11 +41,11 @@ export default function RecommendedPage() {
       const newLimit = width <= 767 ? 2 : width < 1280 ? 8 : 10;
 
       if (limit) {
-        dispatch(fetchRecommendBooks({ limit, page: +1 }));
+        dispatch(fetchRecommendBooks({ limit, page }));
       }
       if (newLimit !== limit) {
         dispatch(setLimit(newLimit));
-        dispatch(fetchRecommendBooks({ limit: newLimit, page: +1 }));
+        dispatch(fetchRecommendBooks({ limit: newLimit, page }));
       }
     };
 
@@ -37,19 +53,19 @@ export default function RecommendedPage() {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [dispatch, limit]);
+  }, [dispatch, limit, page]);
 
   const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      dispatch(fetchRecommendBooks({ page: currentPage + 1, limit }));
+    if (page < totalPages) {
       dispatch(setNextPage());
+      dispatch(fetchRecommendBooks({ page, limit }));
     }
   };
 
   const handlePrevPage = () => {
-    if (currentPage > 1) {
-      dispatch(fetchRecommendBooks({ page: currentPage - 1, limit }));
+    if (page > 1) {
       dispatch(setPrevPage());
+      dispatch(fetchRecommendBooks({ page, limit }));
     }
   };
 
@@ -57,18 +73,39 @@ export default function RecommendedPage() {
     dispatch(modalOpen(book));
   };
 
+  const handleReccommendRefresh = () => {
+    dispatch(setFilteredBooks([]));
+    dispatch(setLimit({ page: 1, limit }));
+    dispatch(fetchRecommendBooks({ page: 1, limit }));
+  };
+
   return (
     <section className={style.recommended}>
       <div className={style.recommendedTitleWrapper}>
-        <h3 className={style.recommendedTitle}>Recommended</h3>
+        <div className={style.recommendedTitleRefresh}>
+          <h3 className={style.recommendedTitle}>Recommended</h3>
+          <button
+            type="button"
+            onClick={handleReccommendRefresh}
+            className={style.recommendedButtonRefresh}>
+            <Icon
+              sprite={spriteRead}
+              id="icon-refresh"
+              width="20px"
+              height="20px"
+              className={style.iconRefresh}
+            />
+          </button>
+        </div>
+
         <div className={style.recommendedButtonWrapper}>
           <button
             type="button"
             onClick={handlePrevPage}
             className={clsx(style.recommendedButton, {
-              [style.disabled]: currentPage === 1,
+              [style.disabled]: page === 1 || filteredBooks.length > 0,
             })}
-            disabled={currentPage === 1}>
+            disabled={page === 1 || filteredBooks.length > 0}>
             <Icon
               sprite={spriteRead}
               id="icon-chevron-left"
@@ -81,23 +118,25 @@ export default function RecommendedPage() {
             type="button"
             onClick={handleNextPage}
             className={clsx(style.recommendedButton, {
-              [style.disabled]: currentPage === totalPages,
+              [style.disabled]: page === totalPages || filteredBooks.length > 0,
             })}
-            disabled={currentPage === totalPages}>
+            disabled={page === totalPages || filteredBooks.length > 0}>
             <Icon
               sprite={spriteRead}
               id="icon-chevron-rigth"
               width="20px"
               height="20px"
               className={style.iconArrov}
-            />
+            />{" "}
           </button>
         </div>
       </div>
 
+      {isLoading && <Loader />}
+
       <ul className={style.recommendedList}>
-        {booksRecommend.length > 0 &&
-          booksRecommend.map(book => (
+        {(filteredBooks.length > 0 ? filteredBooks : booksRecommend).map(
+          book => (
             <li
               key={book._id}
               className={style.recommendedItem}
@@ -116,7 +155,8 @@ export default function RecommendedPage() {
               </p>
               <p className={style.recommendedItemAuthor}>{book.author}</p>
             </li>
-          ))}
+          )
+        )}
       </ul>
     </section>
   );

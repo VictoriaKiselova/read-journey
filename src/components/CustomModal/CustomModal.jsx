@@ -38,6 +38,10 @@ export default function CustomModal() {
       style={{
         overlay: {
           backgroundColor: "rgba(37, 37, 37, 0.4)",
+          zIndex: 1999,
+        },
+        content: {
+          zIndex: 2000,
         },
       }}
       className={style.modalWrapper}>
