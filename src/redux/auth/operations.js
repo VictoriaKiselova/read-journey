@@ -12,13 +12,23 @@ const clearAuthHeader = () => {
 
 export const fetchSignup = createAsyncThunk(
   "auth/signup",
-  async (data, { rejectWithValue }) => {
+  async (data, thunkAPI) => {
     try {
       const response = await axios.post("/users/signup", data);
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data);
+      if (error.response) {
+        return thunkAPI.rejectWithValue({
+          status: error.response.status,
+          message: error.response.data.message,
+        });
+      } else {
+        return thunkAPI.rejectWithValue({
+          status: 500,
+          message: "Network error",
+        });
+      }
     }
   }
 );
@@ -31,7 +41,17 @@ export const fetchSignin = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        return thunkAPI.rejectWithValue({
+          status: error.response.status,
+          message: error.response.data.message,
+        });
+      } else {
+        return thunkAPI.rejectWithValue({
+          status: 500,
+          message: "Network error",
+        });
+      }
     }
   }
 );
@@ -46,7 +66,17 @@ export const fetchRefresh = createAsyncThunk(
       const response = await axios.get("/users/current");
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        return thunkAPI.rejectWithValue({
+          status: error.response.status,
+          message: error.response.data.message,
+        });
+      } else {
+        return thunkAPI.rejectWithValue({
+          status: 500,
+          message: "Network error",
+        });
+      }
     }
   },
   {
@@ -66,7 +96,17 @@ export const fetchSignout = createAsyncThunk(
       clearAuthHeader();
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        return thunkAPI.rejectWithValue({
+          status: error.response.status,
+          message: error.response.data.message,
+        });
+      } else {
+        return thunkAPI.rejectWithValue({
+          status: 500,
+          message: "Network error",
+        });
+      }
     }
   }
 );

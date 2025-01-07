@@ -11,7 +11,6 @@ import style from "./RecommendedBooks.module.scss";
 export default function RecommendedBooks() {
   const dispatch = useDispatch();
   const allBooksList = useSelector(selectAllBooks);
-
   const [randomSelectedBooks, setRandomSelectedBooks] = useState([]);
 
   useEffect(() => {

@@ -5,7 +5,7 @@ axios.defaults.baseURL = "https://readjourney.b.goit.study/api";
 
 export const fetchAddBooks = createAsyncThunk(
   "books/addBooks",
-  async ({ title, author, totalPages }, { rejectWithValue }) => {
+  async ({ title, author, totalPages }, thunkAPI) => {
     try {
       const response = await axios.post("/books/add", {
         title,
@@ -14,7 +14,7 @@ export const fetchAddBooks = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -43,7 +43,7 @@ export const fetchGetBooksOwn = createAsyncThunk(
           : await axios.get("/books/own", { params: { status: filter } });
       return response.data;
     } catch (error) {
-      console.error("Error when receiving books:", error);
+      console.error(error);
       return thunkAPI.rejectWithValue(
         error.response?.data || "An error has occurred"
       );
@@ -56,7 +56,8 @@ export const fetchDeleteBookById = createAsyncThunk(
   async (bookId, thunkAPI) => {
     try {
       const response = await axios.delete(`/books/remove/${bookId}`);
-      return response.data;
+      console.log(response.data);
+      return response.data.id;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data || "An error has occurred"

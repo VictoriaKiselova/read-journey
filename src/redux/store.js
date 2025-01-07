@@ -31,7 +31,7 @@ const pBooksReducer = persistReducer(persistConfigBooks, booksSliceReducer);
 const persistConfigLibraryFilters = {
   key: "filters",
   storage,
-  whitelist: [],
+  whitelist: ["ownBooks"],
 };
 const pLibraryFiltersReducer = persistReducer(
   persistConfigLibraryFilters,

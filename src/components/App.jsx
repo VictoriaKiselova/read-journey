@@ -8,6 +8,8 @@ import {
 import { fetchRefresh } from "../redux/auth/operations";
 import WelcomePage from "../pages/WelcomePage/WelcomePage";
 import Layout from "../components/Layout/Layout";
+import CustomModal from "../components/CustomModal/CustomModal";
+import Notifications from "../components/Notifications/Notifications";
 import style from "./App.module.scss";
 
 const RecommendedPage = lazy(() => import("./RecommendedPage/RecommendedPage"));
@@ -26,6 +28,8 @@ export default function App() {
 
   return (
     <div className={style.app}>
+      <CustomModal />
+      <Notifications />
       {isRefreshing ? (
         <p>Loading...</p>
       ) : (

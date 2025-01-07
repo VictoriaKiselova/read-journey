@@ -11,6 +11,8 @@ const libraryFilters = createSlice({
   initialState: {
     ownBooks: [],
     isSuccessAddToLibrary: false,
+    loading: false,
+    error: false,
   },
   reducers: {
     setIsSuccessAddToLibrary: (state, action) => {
@@ -52,8 +54,10 @@ const libraryFilters = createSlice({
         state.loading = true;
       })
       .addCase(fetchAddBooksByIdFromRecommend.fulfilled, (state, action) => {
-        state.ownBooks = [...state.ownBooks, action.payload];
+        state.ownBooks.push(action.payload);
         state.isSuccessAddToLibrary = true;
+        state.error = false;
+        state.loading = false;
       })
       .addCase(fetchAddBooksByIdFromRecommend.rejected, state => {
         state.error = true;
@@ -64,6 +68,9 @@ const libraryFilters = createSlice({
         state.loading = true;
       })
       .addCase(fetchDeleteBookById.fulfilled, (state, action) => {
+        state.ownBooks = state.ownBooks.filter(
+          item => item._id !== action.payload
+        );
         state.error = false;
         state.loading = false;
       })

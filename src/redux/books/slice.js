@@ -11,9 +11,12 @@ const booksSlice = createSlice({
       totalPages: null,
     },
     isModal: false,
-    currentPage: 1,
+    filteredBooks: [],
     limit: 2,
+    page: 1,
     selectedBook: null,
+    loading: false,
+    error: false,
   },
 
   reducers: {
@@ -26,17 +29,17 @@ const booksSlice = createSlice({
       state.isModal = false;
     },
     setNextPage: state => {
-      if (state.currentPage < state.totalPages) {
-        state.currentPage += 1;
-      }
+      state.page += 1;
     },
     setPrevPage: state => {
-      if (state.currentPage > 1) {
-        state.currentPage -= 1;
-      }
+      state.page -= 1;
     },
     setLimit: (state, action) => {
       state.limit = action.payload;
+      state.page = 1;
+    },
+    setFilteredBooks: (state, action) => {
+      state.filteredBooks = action.payload;
     },
   },
   extraReducers: builder =>
@@ -48,23 +51,26 @@ const booksSlice = createSlice({
       .addCase(fetchRecommendBooks.fulfilled, (state, action) => {
         state.recommend.booksRecommend = action.payload.results;
         state.recommend.totalPages = action.payload.totalPages;
+        state.filteredBooks = [];
         state.loading = false;
+        state.error = false;
       })
       .addCase(fetchRecommendBooks.rejected, state => {
         state.error = true;
         state.loading = false;
       })
       .addCase(fetchSignout.fulfilled, (state, action) => {
-        state.recommend.booksRecommend = [];
+        state.filteredBooks = [];
         state.loading = false;
         state.error = false;
       })
       .addCase(fetchAllBooks.pending, state => {
+        state.filteredBooks = [];
         state.error = false;
         state.loading = true;
       })
       .addCase(fetchAllBooks.fulfilled, (state, action) => {
-        state.allBooks = action.payload.results;
+        state.allBooks = action.payload;
         state.loading = false;
         state.error = false;
       })
@@ -74,6 +80,12 @@ const booksSlice = createSlice({
       }),
 });
 
-export const { modalOpen, modalClose, setNextPage, setPrevPage, setLimit } =
-  booksSlice.actions;
+export const {
+  setFilteredBooks,
+  modalOpen,
+  modalClose,
+  setNextPage,
+  setPrevPage,
+  setLimit,
+} = booksSlice.actions;
 export default booksSlice.reducer;

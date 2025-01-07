@@ -30,7 +30,7 @@ const authSlice = createSlice({
         state.error = false;
       })
       .addCase(fetchSignup.rejected, (state, action) => {
-        state.error = action.payload;
+        state.error = action.payload?.status || action.error.message;
         state.loading = false;
       })
       .addCase(fetchSignin.pending, state => {
@@ -45,7 +45,7 @@ const authSlice = createSlice({
         state.error = false;
       })
       .addCase(fetchSignin.rejected, (state, action) => {
-        state.error = action.payload;
+        state.error = action.payload?.status || action.error.message;
         state.loading = false;
       })
       .addCase(fetchRefresh.pending, state => {
@@ -62,9 +62,9 @@ const authSlice = createSlice({
         state.error = false;
       })
       .addCase(fetchRefresh.rejected, (state, action) => {
-        state.error = action.payload;
         state.loading = false;
         state.isRefreshing = false;
+        state.error = false;
       })
       .addCase(fetchSignout.pending, state => {
         state.error = false;
@@ -78,7 +78,7 @@ const authSlice = createSlice({
         state.error = false;
       })
       .addCase(fetchSignout.rejected, (state, action) => {
-        state.error = action.payload;
+        state.error = action.payload?.status || action.error.message;
         state.loading = false;
       }),
 });

@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 import Dashboard from "../Dashboard/Dashboard";
-import CustomModal from "../CustomModal/CustomModal";
 import style from "./Layout.module.scss";
 
 export default function Layout() {
@@ -12,7 +11,6 @@ export default function Layout() {
         <Dashboard />
         <Outlet />
       </main>
-      <CustomModal />
     </div>
   );
 }

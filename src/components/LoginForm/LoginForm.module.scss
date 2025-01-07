@@ -48,6 +48,7 @@
   line-height: 16px;
   letter-spacing: -0.02em;
   color: $white-color;
+  border: 1px solid transparent;
   @include media($mobile) {
     width: 100%;
   }
@@ -60,6 +61,7 @@
 
 .registerFormInput:focus {
   background-color: $input-color;
+  border: 1px solid $gray-text-color;
 }
 
 .inputEmail {
@@ -129,7 +131,7 @@
     color: $white-color;
     border-color: $gray-text-color;
     transition: background-color 0.3s ease, color 0.3s ease,
-      border-color 0.3s ease; 
+      border-color 0.3s ease;
   }
 }
 
@@ -161,12 +163,4 @@
   @include media($tablet) {
     margin-top: 4px;
   }
-}
-
-.errorBorder {
-  border: 1px solid $play-red-color;
-}
-
-.validBorder {
-  border: 1px solid $statistic-green-color;
 }

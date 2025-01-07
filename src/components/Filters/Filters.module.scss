@@ -1,7 +1,6 @@
 .filterFormContainer {
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
   background-color: $background-color-content;
 }
 
@@ -20,7 +19,7 @@
 }
 
 .wrapperInput {
-  width: 100%;
+  width: 296px;
   position: relative;
   margin-bottom: 8px;
 }

@@ -84,9 +84,16 @@
   color: $text-color-gray;
   display: flex;
   justify-content: space-between;
+  transition: all 0.3s ease-in-out;
   @include media($tablet) {
     font-size: 14px;
     line-height: 18px;
+  }
+  &:hover {
+    color: $white-color;
+  }
+  &:hover .iconArrow {
+    transform: scale(1.05);
   }
 }
 

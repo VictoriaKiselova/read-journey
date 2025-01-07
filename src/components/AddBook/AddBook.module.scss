@@ -3,8 +3,12 @@
   align-items: flex-start;
   width: 100%;
   background-color: $background-color-content;
+
   @include media($tablet) {
     width: 296px;
+  }
+  @include media($desktop) {
+    width: 100%;
   }
 }
 

@@ -34,14 +34,13 @@ export default function RegisterForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
     reset,
   } = useForm({
     resolver: yupResolver(registerSchema),
   });
 
   const handleSignup = data => {
-    console.log("Form Data:", data);
     dispatch(fetchSignup(data));
     reset();
   };
@@ -74,7 +73,7 @@ export default function RegisterForm() {
           className={clsx(
             style.registerFormInput,
             style.inputEmail,
-            errors.email ? style.errorBorder : style.validBorder
+            errors.email
           )}
         />
         {errors.email && <p className={style.error}>{errors.email.message}</p>}
@@ -111,7 +110,7 @@ export default function RegisterForm() {
           className={clsx(
             style.registerFormInput,
             style.inputPassword,
-            errors.password ? style.errorBorder : style.validBorder
+            errors.password
           )}
         />
         {errors.password && (

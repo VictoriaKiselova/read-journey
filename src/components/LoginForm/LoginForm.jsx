@@ -45,11 +45,7 @@ export default function LoginForm() {
           id="email"
           name="email"
           {...register("email")}
-          className={clsx(
-            style.registerFormInput,
-            style.inputEmail,
-            errors.email ? style.errorBorder : style.validBorder
-          )}
+          className={clsx(style.registerFormInput, style.inputEmail)}
         />
         {errors.email && <p className={style.error}>{errors.email.message}</p>}
       </div>
@@ -82,11 +78,7 @@ export default function LoginForm() {
           name="password"
           type={isPasswordVisible ? "text" : "password"}
           {...register("password")}
-          className={clsx(
-            style.registerFormInput,
-            style.inputPassword,
-            errors.password ? style.errorBorder : style.validBorder
-          )}
+          className={clsx(style.registerFormInput, style.inputPassword)}
         />
         {errors.password && (
           <p className={style.error}>{errors.password.message}</p>
