@@ -34,7 +34,7 @@ export default function RegisterForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, touchedFields },
+    formState: { errors },
     reset,
   } = useForm({
     resolver: yupResolver(registerSchema),

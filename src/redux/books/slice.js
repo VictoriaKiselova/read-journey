@@ -11,6 +11,7 @@ const booksSlice = createSlice({
       totalPages: null,
     },
     isModal: false,
+    mobMenu: false,
     filteredBooks: [],
     limit: 2,
     page: 1,
@@ -41,6 +42,12 @@ const booksSlice = createSlice({
     setFilteredBooks: (state, action) => {
       state.filteredBooks = action.payload;
     },
+    openMobMenu: state => {
+      state.mobMenu = true;
+    },
+    closeMobMenu: state => {
+      state.mobMenu = false;
+    },
   },
   extraReducers: builder =>
     builder
@@ -63,6 +70,7 @@ const booksSlice = createSlice({
         state.filteredBooks = [];
         state.loading = false;
         state.error = false;
+        state.mobMenu = false;
       })
       .addCase(fetchAllBooks.pending, state => {
         state.filteredBooks = [];
@@ -87,5 +95,7 @@ export const {
   setNextPage,
   setPrevPage,
   setLimit,
+  openMobMenu,
+  closeMobMenu,
 } = booksSlice.actions;
 export default booksSlice.reducer;
