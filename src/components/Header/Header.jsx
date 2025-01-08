@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectName } from "../../redux/auth/selectors";
 import { fetchSignout } from "../../redux/auth/operations";
+import { openMobMenu } from "../../redux/books/slice";
 import Icon from "../Icon/Icon";
 import spriteRead from "../../assets/Image/sprite-read.svg";
 import style from "./Header.module.scss";
@@ -17,8 +18,12 @@ export default function Header() {
     navigate("/login");
   };
 
+  const handleOpenMobileMenu = () => {
+    dispatch(openMobMenu());
+  };
+
   return (
-    <header className={style.header}>
+    <header id="#header" className={style.header}>
       <div>
         <Icon
           sprite={spriteRead}
@@ -56,13 +61,18 @@ export default function Header() {
       <div className={style.headerNameWrapper}>
         <p className={style.firstLetter}>{nameUser.slice(0, 1)}</p>
         <p className={style.nameUser}>{nameUser}</p>
-        <Icon
-          sprite={spriteRead}
-          id="icon-menu-04"
-          width="28px"
-          height="28px"
-          className={style.iconBurgerMenu}
-        />
+        <button
+          type="button"
+          className={style.buttoMobMenu}
+          onClick={handleOpenMobileMenu}>
+          <Icon
+            sprite={spriteRead}
+            id="icon-menu-04"
+            width="28px"
+            height="28px"
+            className={style.iconBurgerMenu}
+          />
+        </button>
         <button type="button" className={style.logOut} onClick={handleSingOut}>
           Log out
         </button>

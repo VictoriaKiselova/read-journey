@@ -56,7 +56,6 @@ export const fetchDeleteBookById = createAsyncThunk(
   async (bookId, thunkAPI) => {
     try {
       const response = await axios.delete(`/books/remove/${bookId}`);
-      console.log(response.data);
       return response.data.id;
     } catch (error) {
       return thunkAPI.rejectWithValue(

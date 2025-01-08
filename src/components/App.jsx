@@ -6,12 +6,13 @@ import {
   selectIsRefreshing,
 } from "../redux/auth/selectors";
 import { fetchRefresh } from "../redux/auth/operations";
+import { selectMobMenu } from "../redux/books/selectors";
 import WelcomePage from "../pages/WelcomePage/WelcomePage";
 import Layout from "../components/Layout/Layout";
 import CustomModal from "../components/CustomModal/CustomModal";
 import Notifications from "../components/Notifications/Notifications";
+import MobileMenu from "../components/MobileMenu/MobileMenu";
 import style from "./App.module.scss";
-
 const RecommendedPage = lazy(() => import("./RecommendedPage/RecommendedPage"));
 const RegisterForm = lazy(() => import("./RegisterForm/RegisterForm"));
 const LoginForm = lazy(() => import("./LoginForm/LoginForm"));
@@ -21,6 +22,7 @@ export default function App() {
   const dispatch = useDispatch();
   const isAuthorized = useSelector(selectIsAuthorized);
   const isRefreshing = useSelector(selectIsRefreshing);
+  const isMenuOpen = useSelector(selectMobMenu);
 
   useEffect(() => {
     dispatch(fetchRefresh());
@@ -28,6 +30,7 @@ export default function App() {
 
   return (
     <div className={style.app}>
+      {isMenuOpen && <MobileMenu />}
       <CustomModal />
       <Notifications />
       {isRefreshing ? (

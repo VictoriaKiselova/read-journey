@@ -43,6 +43,10 @@
   right: 21px;
   background-color: transparent;
   border: none;
+  transition: stroke 0.3s ease;
+  &:hover .iconClose {
+    stroke: $text-color-gray;
+  }
 }
 
 .iconClose {
