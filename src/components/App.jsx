@@ -7,7 +7,7 @@ import {
 } from "../redux/auth/selectors";
 import { fetchRefresh } from "../redux/auth/operations";
 import { selectMobMenu } from "../redux/books/selectors";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import Loader from "../components/Loader/Loader";
 import Layout from "../components/Layout/Layout";
 import CustomModal from "../components/CustomModal/CustomModal";
@@ -35,8 +35,11 @@ export default function App() {
   }, [location, isAuthorized]);
 
   useEffect(() => {
-    if (isAuthorized && !localStorage.getItem("lastVisitedPath")) {
-      localStorage.setItem("lastVisitedPath", "/recommended");
+    if (isAuthorized) {
+      const lastVisitedPath = localStorage.getItem("lastVisitedPath");
+      if (!lastVisitedPath || !lastVisitedPath.startsWith("/")) {
+        localStorage.setItem("lastVisitedPath", "/recommended");
+      }
     }
   }, [isAuthorized]);
 
@@ -55,19 +58,43 @@ export default function App() {
       <ToastContainer />
       <Suspense fallback={<Loader />}>
         <Routes>
-          {isAuthorized ? (
-            <Route path="/" element={<Layout />}>
-              <Route path="recommended" element={<RecommendedPage />} />
-              <Route path="library" element={<MyLibraryBooks />} />
-              <Route path="reading/:id" element={<MyBook />} />
-              <Route path="*" element={<Navigate to="/recommended" replace />} />
-            </Route>
-          ) : (
-            <Route path="/" element={<WelcomePage />}>
-              <Route path="register" element={<RegisterForm />} />
-              <Route path="login" element={<LoginForm />} />
+          {!isAuthorized ? (
+            <>
+              <Route path="/" element={<WelcomePage />}>
+                <Route path="register" element={<RegisterForm />} />
+                <Route path="login" element={<LoginForm />} />
+                <Route index element={<Navigate to="register" replace />} />
+              </Route>
               <Route path="*" element={<Navigate to="/register" replace />} />
-            </Route>
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Layout />}>
+                <Route path="recommended" element={<RecommendedPage />} />
+                <Route path="library" element={<MyLibraryBooks />} />
+                <Route
+                  path="reading/:id"
+                  element={isAuthorized ? <MyBook /> : <Navigate to="/login" />}
+                />
+              </Route>
+              <Route
+                path="*"
+                element={
+                  <Navigate
+                    to={
+                      isAuthorized
+                        ? localStorage
+                            .getItem("lastVisitedPath")
+                            ?.startsWith("/")
+                          ? localStorage.getItem("lastVisitedPath")
+                          : "/recommended"
+                        : "/register"
+                    }
+                    replace
+                  />
+                }
+              />
+            </>
           )}
         </Routes>
       </Suspense>
