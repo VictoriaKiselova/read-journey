@@ -59,8 +59,8 @@ const libraryFilters = createSlice({
         state.error = false;
         state.loading = false;
       })
-      .addCase(fetchAddBooksByIdFromRecommend.rejected, state => {
-        state.error = true;
+      .addCase(fetchAddBooksByIdFromRecommend.rejected, (state, action) => {
+        state.error = action.payload || "Failed to add recommended book";
         state.loading = false;
       })
       .addCase(fetchDeleteBookById.pending, state => {

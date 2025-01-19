@@ -8,6 +8,9 @@ import {
   selectIsLoading,
   selectOwnBooks,
 } from "../../redux/libraryFilters/selectors";
+import { modalOpen } from "../../redux/books/slice";
+import { setReadingBook } from "../../redux/reading/slice";
+import { fetchReadingInfo } from "../../redux/reading/operations";
 import notFoundImage1x from "../../assets/Image/not-found-image@1x.png";
 import book1x from "../../assets/Image/book@1x.png";
 import book2x from "../../assets/Image/book@2x.png";
@@ -33,6 +36,12 @@ export default function MyLibraryBooks() {
 
   const handleDeleteBook = bookId => {
     dispatch(fetchDeleteBookById(bookId));
+  };
+
+  const handleSwitchReadingPage = book => {
+    dispatch(fetchReadingInfo(book._id));
+    dispatch(modalOpen(null));
+    dispatch(setReadingBook(book));
   };
 
   return (
@@ -63,13 +72,11 @@ export default function MyLibraryBooks() {
       {ownBooks.length > 0 ? (
         <ul className={style.myLibraryList}>
           {ownBooks.map(book => (
-            <li
-              key={book._id}
-              className={style.myLibraryItem}
-              onClick={() => {
-                // handleOpenModal(book);
-              }}>
+            <li key={book._id} className={style.myLibraryItem}>
               <img
+                onClick={() => {
+                  handleSwitchReadingPage(book);
+                }}
                 src={book.imageUrl ? book.imageUrl : notFoundImage1x}
                 alt={book.title}
                 className={style.myLibraryItemImage}

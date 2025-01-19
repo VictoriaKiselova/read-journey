@@ -26,7 +26,7 @@ const booksSlice = createSlice({
       state.selectedBook = action.payload;
     },
     modalClose: (state, action) => {
-      state.selectedBook = action.payload;
+      state.selectedBook = null;
       state.isModal = false;
     },
     setNextPage: state => {

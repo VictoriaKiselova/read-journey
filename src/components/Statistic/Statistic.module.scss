@@ -1,0 +1,89 @@
+.statisticChapter {
+  display: none;
+  @include media($tablet) {
+  }
+  @include media($desktop) {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: $text-color-gray;
+    margin-bottom: 20px;
+  }
+}
+
+.statisticContainer {
+  padding: 20px 90px;
+  border-radius: 12px;
+  background-color: $input-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include media($tablet) {
+    padding: 28px 91px;
+  }
+  @include media($desktop) {
+    padding: 20px 62px;
+  }
+}
+.statisticGraphWrapper {
+  width: 116px;
+  height: 116px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 21px;
+  @include media($tablet) {
+    width: 138px;
+    height: 138px;
+    margin-bottom: 16px;
+  }
+  @include media($desktop) {
+    width: 189px;
+    height: 189px;
+  }
+}
+
+.statisticReading {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+.statisticPercentPageRead {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $white-color;
+  margin-bottom: 6px;
+  @include media($tablet) {
+    font-size: 20px;
+    line-height: 20px;
+  }
+  @include media($desktop) {
+    margin-bottom: 8px;
+  }
+}
+
+.iconStatisticGraph {
+  width: 14px;
+  height: 14px;
+}
+.statisticTotalReadPages {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $text-color-gray;
+  @include media($tablet) {
+    font-size: 12px;
+    line-height: 14px;
+  }
+  @include media($desktop) {
+  }
+}

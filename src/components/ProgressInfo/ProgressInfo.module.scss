@@ -1,0 +1,55 @@
+.addReadingTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $white-color;
+  margin-bottom: 14px;
+  @include media($tablet) {
+    font-size: 20px;
+    line-height: 20px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.addReadingInfo {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $text-color-gray;
+  margin-bottom: 20px;
+  @include media($tablet) {
+    margin-bottom: 50px;
+  }
+  @include media($desktop) {
+    margin-bottom: 60px;
+  }
+}
+
+.addReadingImg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 20px auto;
+  @include media($tablet) {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+  @include media($desktop) {
+  }
+}
+
+.starPicture,
+.imageStar {
+  @include media($tablet) {
+    width: 100px;
+    height: 100px;
+  }
+  @include media($desktop) {
+  }
+}

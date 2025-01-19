@@ -1,6 +1,7 @@
 import * as Yup from "yup";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast, Bounce } from "react-toastify";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import {
@@ -40,6 +41,13 @@ export default function AddBook() {
       await dispatch(fetchAddBooks({ title, author, totalPages }));
       dispatch(fetchGetBooksOwn());
       reset();
+      toast.success("A new book has been added to the library!", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: true,
+        theme: "dark",
+        transition: Bounce,
+      });
     } catch (error) {
       console.error("Error adding book:", error);
     }
