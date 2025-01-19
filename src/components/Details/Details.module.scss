@@ -1,0 +1,59 @@
+.detailsContainer {
+  position: relative;
+}
+
+.detailsNav {
+  min-width: 313px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  @include media($tablet) {
+    width: 321px;
+    margin-bottom: 16px;
+  }
+  @include media($desktop) {
+    margin-bottom: 20px;
+  }
+}
+.detailsTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $white-color;
+  @include media($desktop) {
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+
+.detailsButtonsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detailsButton {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.iconStatistic {
+  width: 16px;
+  height: 16px;
+  stroke: $text-color-gray;
+  @include media($tablet) {
+    width: 20px;
+    height: 20px;
+  }
+
+  @include media($desktop) {
+  }
+}
+.iconStatisticActive {
+  stroke: $white-color;
+}

@@ -1,0 +1,246 @@
+.diaryContainer {
+  position: relative;
+}
+.diaryList::before {
+  position: absolute;
+  top: 16px;
+  left: 23px;
+  content: "";
+  width: 2px;
+  height: auto;
+  min-height: 100%;
+  background-color: $background-color-content;
+  @include media($desktop) {
+    top: 20px;
+    left: 30px;
+  }
+}
+
+.diaryList {
+  padding: 16px;
+  overflow-y: scroll;
+  max-height: 211px;
+  border-radius: 12px;
+  background-color: $input-color;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  @include media($tablet) {
+    gap: 16px;
+    max-height: 252px;
+  }
+  @include media($desktop) {
+    padding: 20px;
+    max-height: 373px;
+    gap: 22px;
+  }
+}
+
+.diaryList::-webkit-scrollbar {
+  width: 5px;
+}
+
+.diaryList::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #262626 10%,
+    #444444 30%,
+    #666666 50%,
+    #444444 70%,
+    #262626 90%,
+    transparent 100%
+  );
+  border-radius: 3px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.diaryList::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #444444 0%, #666666 50%, #444444 100%);
+  transform: scale(1.1);
+}
+
+.diaryList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.diaryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @include media($desktop) {
+    gap: 28px;
+  }
+}
+.diaryDateWrapper {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  padding-right: 20px;
+  @include media($desktop) {
+    padding-right: 23px;
+  }
+}
+
+.diaryDateBlock {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  @include media($tablet) {
+    gap: 10px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.iconDiaryItem {
+  width: 16px;
+  height: 16px;
+  fill: $text-color-gray;
+  z-index: 10;
+  @include media($tablet) {
+    width: 20px;
+    height: 20px;
+  }
+  @include media($desktop) {
+  }
+}
+.diaryItem:first-child .iconDiaryItem {
+  fill: $white-color;
+}
+
+.diaryItemDate {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  text-align: left;
+  color: $white-color;
+  @include media($tablet) {
+    font-size: 16px;
+    line-height: 18px;
+  }
+  @include media($desktop) {
+  }
+}
+.diaryItemPageReaded {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: $text-color-gray;
+  @include media($tablet) {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.diaryItemBox {
+  padding-left: 25px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  @include media($desktop) {
+    padding-left: 30px;
+  }
+}
+
+.readingPersent {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $white-color;
+  margin-bottom: 10px;
+  @include media($tablet) {
+    font-size: 20px;
+    line-height: 20px;
+  }
+  @include media($desktop) {
+    margin-bottom: 8px;
+  }
+}
+
+.diarySpeedReadingTime {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $text-color-gray;
+  @include media($tablet) {
+    font-size: 12px;
+    line-height: 14px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.diaryIconsStatisticDelBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  @include media($tablet) {
+    gap: 8px;
+  }
+  @include media($desktop) {
+    gap: 7px;
+  }
+}
+
+.diarySpeedReadingWrapper {
+  width: 43px;
+  @include media($tablet) {
+    width: 59px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.iconGraph {
+  width: 43px;
+  height: 18px;
+  @include media($tablet) {
+    width: 59px;
+    height: 25px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.diarySpeedReadingHour {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: $text-color-gray;
+  @include media($tablet) {
+    font-size: 12px;
+    line-height: 14px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.buttonDeleteItem {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.iconDeleteItem {
+  width: 14px;
+  height: 14px;
+  stroke: $text-color-gray;
+  fill: transparent;
+  transition: stroke 0.3s ease;
+}
+.buttonDeleteItem:hover .iconDeleteItem {
+  stroke: $play-red-color;
+}

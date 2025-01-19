@@ -1,0 +1,140 @@
+.addReadingContainer {
+  @include media($tablet) {
+    height: 272px;
+  }
+  @include media($desktop) {
+    height: min-content;
+  }
+}
+.addReadingForm {
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: $background-color-content;
+  margin-bottom: 20px;
+  @include media($tablet) {
+    margin: 0;
+  }
+  @include media($desktop) {
+  }
+}
+
+.addReadingInputTitle {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $white-color;
+  margin: 0 0 8px 14px;
+  @include media($tablet) {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+.wrapperInput {
+  width: 296px;
+  position: relative;
+  margin-bottom: 8px;
+  @include media($tablet) {
+  }
+  @include media($desktop) {
+    width: 313px;
+  }
+}
+
+.addReadingFormInput {
+  display: block;
+  outline: none;
+  width: 100%;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  background-color: $input-color;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  color: $white-color;
+  border: 0.5px solid transparent;
+  @include media($mobile) {
+    width: 100%;
+  }
+  @include media($tablet) {
+    padding: 16px 14px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+.addReadingFormInput:focus {
+  background-color: $input-color;
+  border: 0.5px solid rgba(249, 249, 249, 0.1);
+}
+
+.inputPage {
+  padding-left: 108px;
+  @include media($tablet) {
+    padding-left: 122px;
+  }
+  @include media($desktop) {
+  }
+}
+
+.addReadingFormLabel {
+  position: absolute;
+  top: 15px;
+  left: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $text-color-gray;
+  @include media($tablet) {
+    font-size: 14px;
+    line-height: 18px;
+    top: 17px;
+  }
+}
+
+.addReadingFormButton {
+  display: block;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: $white-color;
+  border: 0.5px solid rgba(249, 249, 249, 0.1);
+  border-radius: 30px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease,
+    border-color 0.3s ease;
+  margin-top: 20px;
+  @include media($tablet) {
+    padding: 12px 28px;
+    font-size: 16px;
+    line-height: 18px;
+  }
+  &:hover {
+    background-color: $white-color;
+    color: $background-color-main;
+    border-color: $white-color;
+    transition: background-color 0.3s ease, color 0.3s ease,
+      border-color 0.3s ease;
+  }
+}
+.error {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $play-red-color;
+  @include media($tablet) {
+    margin-top: 4px;
+  }
+}

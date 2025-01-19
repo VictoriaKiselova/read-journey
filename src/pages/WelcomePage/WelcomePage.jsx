@@ -1,5 +1,7 @@
-import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectIsAuthorized } from "../../redux/auth/selectors";
 import iPhoneMob1x from "../../assets/Image/iPhoneMob1x.png";
 import iPhoneMob2x from "../../assets/Image/iPhoneMob2x.png";
 import iPhoneDesktop1x from "../../assets/Image/iPhoneDesktop1x.png";
@@ -13,6 +15,15 @@ export default function WelcomePage() {
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(prevState => !prevState);
   };
+
+  const isAuthorized = useSelector(selectIsAuthorized);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthorized) {
+      navigate("/recommended");
+    }
+  }, [isAuthorized, navigate]);
 
   return (
     <section className={style.welcomePageContainer}>

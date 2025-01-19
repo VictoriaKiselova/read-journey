@@ -6,7 +6,7 @@ const setAuthHeader = token => {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
 
-const clearAuthHeader = () => {
+export const clearAuthHeader = () => {
   axios.defaults.headers.common["Authorization"] = "";
 };
 
@@ -62,11 +62,22 @@ export const fetchRefresh = createAsyncThunk(
     try {
       const reduxState = thunkAPI.getState();
       const savedToken = reduxState.auth.token;
+
+      if (!savedToken) {
+        return thunkAPI.rejectWithValue({
+          status: 401,
+          message: "No token provided",
+        });
+      }
       setAuthHeader(savedToken);
       const response = await axios.get("/users/current");
       return response.data;
     } catch (error) {
       if (error.response) {
+        if (error.response.status === 401) {
+          clearAuthHeader();
+          thunkAPI.dispatch(fetchSignout());
+        }
         return thunkAPI.rejectWithValue({
           status: error.response.status,
           message: error.response.data.message,

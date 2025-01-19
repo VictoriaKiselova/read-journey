@@ -25,11 +25,14 @@ export default function RecommendedPage() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const filteredBooks = useSelector(selectIsFilteredBooks);
-
   const { booksRecommend, totalPages } = useSelector(
     state => state.books.recommend
   );
   const { limit, page } = useSelector(state => state.books);
+
+  useEffect(() => {
+    dispatch(fetchRecommendBooks({ page, limit }));
+  }, [page, limit, dispatch]);
 
   useEffect(() => {
     dispatch(fetchAllBooks());
@@ -58,14 +61,12 @@ export default function RecommendedPage() {
   const handleNextPage = () => {
     if (page < totalPages) {
       dispatch(setNextPage());
-      dispatch(fetchRecommendBooks({ page, limit }));
     }
   };
 
   const handlePrevPage = () => {
     if (page > 1) {
       dispatch(setPrevPage());
-      dispatch(fetchRecommendBooks({ page, limit }));
     }
   };
 
