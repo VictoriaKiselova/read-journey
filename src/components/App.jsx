@@ -1,6 +1,12 @@
 import { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import {
   selectIsAuthorized,
   selectIsRefreshing,
@@ -24,6 +30,7 @@ import MyBook from "../components/MyBook/MyBook";
 export default function App() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const isAuthorized = useSelector(selectIsAuthorized);
   const isRefreshing = useSelector(selectIsRefreshing);
   const isMenuOpen = useSelector(selectMobMenu);
@@ -35,13 +42,11 @@ export default function App() {
   }, [location, isAuthorized]);
 
   useEffect(() => {
-    if (isAuthorized) {
+    if (isRefreshing) {
       const lastVisitedPath = localStorage.getItem("lastVisitedPath");
-      if (!lastVisitedPath || !lastVisitedPath.startsWith("/")) {
-        localStorage.setItem("lastVisitedPath", "/recommended");
-      }
+      navigate(lastVisitedPath);
     }
-  }, [isAuthorized]);
+  }, [isRefreshing, navigate]);
 
   useEffect(() => {
     dispatch(fetchRefresh());
