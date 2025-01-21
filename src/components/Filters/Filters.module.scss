@@ -19,9 +19,12 @@
 }
 
 .wrapperInput {
-  width: 296px;
+  width: 100%;
   position: relative;
   margin-bottom: 8px;
+  @include media($tablet) {
+    width: 296px;
+  }
 }
 
 .registerFormInput {

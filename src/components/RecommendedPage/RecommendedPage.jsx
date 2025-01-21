@@ -92,8 +92,8 @@ export default function RecommendedPage() {
             <Icon
               sprite={spriteRead}
               id="icon-refresh"
-              width="20px"
-              height="20px"
+              width="18px"
+              height="18px"
               className={style.iconRefresh}
             />
           </button>
@@ -110,8 +110,8 @@ export default function RecommendedPage() {
             <Icon
               sprite={spriteRead}
               id="icon-chevron-left"
-              width="20px"
-              height="20px"
+              width="18px"
+              height="18px"
               className={style.iconArrov}
             />
           </button>
@@ -125,10 +125,10 @@ export default function RecommendedPage() {
             <Icon
               sprite={spriteRead}
               id="icon-chevron-rigth"
-              width="20px"
-              height="20px"
+              width="18px"
+              height="18px"
               className={style.iconArrov}
-            />{" "}
+            />
           </button>
         </div>
       </div>

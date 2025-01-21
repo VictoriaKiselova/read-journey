@@ -15,7 +15,7 @@
 }
 
 .statisticContainer {
-  padding: 20px 90px;
+  padding: 20px 100px;
   border-radius: 12px;
   background-color: $input-color;
   display: flex;
@@ -48,6 +48,7 @@
 }
 
 .statisticReading {
+  width: 95px;
   display: flex;
   align-items: flex-start;
   gap: 15px;
